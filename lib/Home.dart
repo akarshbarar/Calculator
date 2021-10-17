@@ -8,17 +8,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var inputText = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.black,
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                     flex: 3,
-                    child: TextFormField(
-                      decoration: InputDecoration(),
+                    child: Text(
+                      inputText.toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 100),
+                      textAlign: TextAlign.right,
+                      textScaleFactor: 1.5,
                     )),
                 Expanded(
                     flex: 7,
@@ -28,45 +34,64 @@ class _HomeState extends State<Home> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            customButton("AC", Colors.grey[300]),
-                            customButton("+/-", Colors.grey[300]),
-                            customButton("%", Colors.grey[300]),
-                            customButton("/", Colors.orange[400]),
+                            customButton("AC", Colors.grey[300], Colors.black,
+                                inputText),
+                            customButton("+/-", Colors.grey[300], Colors.black,
+                                inputText),
+                            customButton(
+                                "%", Colors.grey[300], Colors.black, inputText),
+                            customButton("/", Colors.orange[300], Colors.white,
+                                inputText),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            customButton("7", Colors.grey[300]),
-                            customButton("8", Colors.grey[300]),
-                            customButton("9", Colors.grey[300]),
-                            customButton("X", Colors.orange[300]),
+                            customButton(
+                                "7", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "8", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "9", Colors.grey[900], Colors.white, inputText),
+                            customButton("X", Colors.orange[300], Colors.white,
+                                inputText),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            customButton("4", Colors.grey[300]),
-                            customButton("5", Colors.grey[300]),
-                            customButton("6", Colors.grey[300]),
-                            customButton("-", Colors.orange[300]),
+                            customButton(
+                                "4", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "5", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "6", Colors.grey[900], Colors.white, inputText),
+                            customButton("-", Colors.orange[300], Colors.white,
+                                inputText),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            customButton("1", Colors.grey[300]),
-                            customButton("2", Colors.grey[300]),
-                            customButton("3", Colors.grey[300]),
-                            customButton("+", Colors.orange[300]),
+                            customButton(
+                                "1", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "2", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                "3", Colors.grey[900], Colors.white, inputText),
+                            customButton("+", Colors.orange[300], Colors.white,
+                                inputText),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            customButton("0", Colors.grey[300]),
-                            customButton(",", Colors.grey[300]),
-                            customButton("=", Colors.orange[300]),
+                            customButton(
+                                "0", Colors.grey[900], Colors.white, inputText),
+                            customButton(
+                                ",", Colors.grey[900], Colors.white, inputText),
+                            customButton("=", Colors.orange[300], Colors.white,
+                                inputText),
                           ],
                         ),
                       ],
@@ -75,16 +100,22 @@ class _HomeState extends State<Home> {
             )));
   }
 
-  Widget customButton(text, color) {
+  Widget customButton(text, backgroundColor, textColor, inputText) {
     return RawMaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        print(text);
+        setState(() {
+          inputText = text;
+        });
+      },
       elevation: 0,
-      fillColor: color,
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-      ),
+      fillColor: backgroundColor,
+      child: Text(text,
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          )),
       padding: EdgeInsets.all(25),
       shape: CircleBorder(),
     );
